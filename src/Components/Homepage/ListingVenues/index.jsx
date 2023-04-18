@@ -1,24 +1,34 @@
-import { Card } from "antd";
 import React from "react";
 import noImage from "../../../media/NoMedia.png";
+import { CardGrid, CardStyle, ImgCard } from "./style";
+import "./style.css";
 const VenuesListing = ({ venues }) => {
+  console.log(venues);
   return (
-    <>
+    <CardGrid>
       {venues.map((venue, idx) => {
+        let imageListing;
+        if (venue.media[0].match(/.*\.(jpeg|jpg|gif|png)/i)) {
+          imageListing = venue.media[0];
+        } else {
+          imageListing = noImage;
+        }
+
         console.log(venue);
         return (
-          <Card
+          <CardStyle
             key={idx}
             cover={
-              <img
-                src={!venue.media[0] ? venue.media[0] : { noImage }}
-                alt={venue.name}
-              />
+              venue.media ? (
+                <ImgCard src={imageListing} alt={venue.name} />
+              ) : (
+                <ImgCard src={imageListing} alt='nothing to see yet' />
+              )
             }
-          ></Card>
+          ></CardStyle>
         );
       })}
-    </>
+    </CardGrid>
   );
 };
 

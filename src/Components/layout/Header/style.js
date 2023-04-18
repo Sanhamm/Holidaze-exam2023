@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const BackgroundDiv = styled.div`
   background-color: #232325;
+  border-bottom: 1px solid #c3752d;
 `;
 
 export const FlexDiv = styled.div`

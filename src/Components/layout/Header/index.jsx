@@ -10,8 +10,8 @@ import {
   OuterMenuDiv,
   UserIcon,
 } from "./style";
-import HamburgerMenu from "./HamburgerMenu";
 import { Link } from "react-router-dom";
+import HamburgerMenu from "./HamburgerMenu";
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -28,8 +28,10 @@ const Header = () => {
             onClick={() => {
               if (openMenu === false) {
                 setOpenMenu(true);
+                console.log("open");
               } else {
                 setOpenMenu(false);
+                console.log("close");
               }
             }}
           >
