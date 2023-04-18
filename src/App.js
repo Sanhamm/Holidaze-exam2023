@@ -1,8 +1,25 @@
+import { Route, Routes } from "react-router-dom";
+import Layout from "./Components/layout";
+import "./main.css";
+import Homepage from "./Pages/Homepage";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import Profile from "./Pages/Profile";
+import AddVenue from "./Pages/AddVenue";
+import Venue from "./Pages/Venue";
+
 function App() {
   return (
-    <div>
-      <p>Hello world</p>
-    </div>
+    <Layout>
+      <Routes>
+        <Route path='/' element={<Homepage />} />
+        <Route path='/Login' element={<Login />} />
+        <Route path='/Register' element={<Register />} />
+        <Route path='/Profile/' element={<Profile />} />
+        <Route path='/AddVenu' element={<AddVenue />} />
+        <Route path='/Venue/' element={<Venue />} />
+      </Routes>
+    </Layout>
   );
 }
 
