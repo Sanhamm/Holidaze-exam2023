@@ -1,7 +1,12 @@
 import React from "react";
+import Loginindex from "../Components/Login";
 
-const Login = () => {
-  return <div></div>;
+const LoginPage = () => {
+  return (
+    <div>
+      <Loginindex />
+    </div>
+  );
 };
 
-export default Login;
+export default LoginPage;

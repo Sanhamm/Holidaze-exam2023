@@ -17,7 +17,7 @@ function App() {
         <Route path='/Register' element={<Register />} />
         <Route path='/Profile/' element={<Profile />} />
         <Route path='/AddVenu' element={<AddVenue />} />
-        <Route path='/Venue/' element={<Venue />} />
+        <Route path='/Venue/:id' element={<Venue />} />
       </Routes>
     </Layout>
   );

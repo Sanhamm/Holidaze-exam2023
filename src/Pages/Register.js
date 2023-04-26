@@ -1,7 +1,8 @@
 import React from "react";
+import RegisterIndex from "../Components/Register";
 
 const Register = () => {
-  return <div></div>;
+  return <RegisterIndex />;
 };
 
 export default Register;

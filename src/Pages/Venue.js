@@ -1,7 +1,8 @@
 import React from "react";
+import VenueSiteIndex from "../Components/Venuesite";
 
 const Venue = () => {
-  return <div></div>;
+  return <VenueSiteIndex />;
 };
 
 export default Venue;

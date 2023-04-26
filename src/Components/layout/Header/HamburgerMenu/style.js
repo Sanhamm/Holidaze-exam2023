@@ -9,7 +9,7 @@ export const HamburgerBackground = styled.div`
   position: absolute;
   right: 50px;
   top: 62px;
-  z-index: 1;
+  z-index: 2;
 `;
 
 export const LiMenu = styled(Link)`

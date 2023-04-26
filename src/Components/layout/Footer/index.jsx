@@ -5,7 +5,6 @@ const Footer = () => {
   const scrollToTop = () => {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
-    console.log("scrolled back to top");
   };
   return (
     <BackgroundFooter>
