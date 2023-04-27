@@ -12,7 +12,6 @@ import {
 import { FlexDiv } from "./style";
 import NoAvatar from "../../../media/blank-profile-picture-gc1cc27fcf_1280.png";
 const VenueInfo = ({ data }) => {
-  console.log(data);
   return (
     <DivAllInfo>
       <H1VenueInfo>{data.name}</H1VenueInfo>

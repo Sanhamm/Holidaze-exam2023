@@ -18,8 +18,6 @@ const VenueSiteIndex = () => {
     console.error(isError);
   }
 
-  //console.log(data);
-
   return (
     <div>
       <CarouselImg media={data.media} />

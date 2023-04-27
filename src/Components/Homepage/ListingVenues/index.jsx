@@ -13,18 +13,9 @@ import {
 import "./style.css";
 import { Link } from "react-router-dom";
 const VenuesListing = ({ venues }) => {
-  console.log(venues);
   return (
     <CardGrid>
       {venues.map((venue, idx) => {
-        // let imageListing;
-        // if (venue.media[0].match(/.*\.(jpeg|jpg|gif|png)/i)) {
-        //   imageListing = venue.media[0];
-        // } else {
-        //   imageListing = noImage;
-        // }
-
-        console.log(venue.id);
         return (
           <CardStyle
             key={idx}
