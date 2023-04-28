@@ -16,6 +16,7 @@ import { schema } from "./schema";
 import usePostApi from "../../Hooks/usePostApi";
 import { URL_LOGIN } from "../../Utils/Url";
 import useLocalestorage from "../../Hooks/useLoacalestorage";
+import { Avatar } from "antd";
 
 const Loginindex = () => {
   const {
@@ -27,7 +28,11 @@ const Loginindex = () => {
   });
 
   const { data, isError, postData } = usePostApi();
-  const { storage, storeData } = useLocalestorage();
+  const [accessToken, setAccessToken] = useLocalestorage("accessToken");
+  const [email, setEmail] = useLocalestorage("email");
+  const [name, setName] = useLocalestorage("name");
+  const [avatar, setAvatar] = useLocalestorage("avatar");
+  const [venueManager, setVenueManager] = useLocalestorage("venueManager");
 
   async function onSubmit(loginUser) {
     console.log(loginUser);
@@ -43,18 +48,17 @@ const Loginindex = () => {
     if (isError) {
       console.warn(isError);
     }
-    console.log(storage);
   }
-
   useEffect(() => {
-    storeData(
-      data.accessToken,
-      data.avatar,
-      data.name,
-      data.email,
-      data.venueManager
-    );
-  }, []);
+    console.log(data);
+    if (data) {
+      setAccessToken(data.accessToken);
+      setEmail(data.email);
+      setName(data.name);
+      setAvatar(data.avatar);
+      setVenueManager(data.venueManager);
+    }
+  }, [data]);
 
   return (
     <LoginDiv>
