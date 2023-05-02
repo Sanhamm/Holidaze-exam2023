@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const H1VenueInfo = styled.h1`
@@ -28,9 +29,11 @@ export const ProfileAvatar = styled.img`
   border: 1px solid #ffcb65;
 `;
 
-export const PAvatar = styled.p`
+export const PAvatar = styled(Link)`
   color: #ffcb65;
   margin-left: 20px;
+  text-decoration: none;
+  margin-top: 15px;
 `;
 
 export const GridProfileDiv = styled.div`

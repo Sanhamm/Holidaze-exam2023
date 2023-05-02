@@ -10,6 +10,7 @@ const useApi = (url) => {
         setIsError(false);
         const fetchedData = await fetch(url);
         const json = await fetchedData.json();
+        console.log(json);
         setData(json);
       } catch (error) {
         console.log(error);

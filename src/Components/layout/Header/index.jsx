@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../../../media/Holidaze.svg";
+import { AvatarImg, HamburgerBackground, LiMenu, UlMenu } from "./style";
+
 import {
   BackgroundDiv,
   FlexDiv,
@@ -11,9 +13,13 @@ import {
   UserIcon,
 } from "./style";
 import { Link } from "react-router-dom";
-import HamburgerMenu from "./HamburgerMenu";
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const accessToken = localStorage.getItem("accessToken");
+  const userName = JSON.parse(localStorage.getItem("name"));
+  const avatar = JSON.parse(localStorage.getItem("avatar"));
+  console.log(avatar);
+
   return (
     <BackgroundDiv>
       <FlexDiv>
@@ -32,12 +38,58 @@ const Header = () => {
               }
             }}
           >
-            <UserIcon />
+            {avatar === null ? (
+              <UserIcon />
+            ) : (
+              <AvatarImg src={avatar} alt='avatar for user' />
+            )}
             <MenuIcon />
           </MenuDiv>
         </OuterMenuDiv>
       </FlexDiv>
-      {openMenu ? <HamburgerMenu /> : ""}
+      {openMenu ? (
+        <HamburgerBackground>
+          {accessToken === null ? (
+            <UlMenu>
+              <LiMenu to='/' onClick={() => setOpenMenu(false)}>
+                Home
+              </LiMenu>
+              <LiMenu to='/Login' onClick={() => setOpenMenu(false)}>
+                Login
+              </LiMenu>
+              <LiMenu to='/Register' onClick={() => setOpenMenu(false)}>
+                Register
+              </LiMenu>
+            </UlMenu>
+          ) : (
+            <UlMenu>
+              <LiMenu to='/' onClick={() => setOpenMenu(false)}>
+                Home
+              </LiMenu>
+              <LiMenu
+                to={`/Profile/${userName}`}
+                onClick={() => setOpenMenu(false)}
+              >
+                Profile
+              </LiMenu>
+              <LiMenu to='/AddVenue' onClick={() => setOpenMenu(false)}>
+                Add venue
+              </LiMenu>
+              <LiMenu
+                to='/'
+                onClick={() => {
+                  setOpenMenu(false);
+                  localStorage.clear();
+                }}
+              >
+                Logout
+              </LiMenu>
+            </UlMenu>
+          )}
+        </HamburgerBackground>
+      ) : (
+        ""
+      )}
     </BackgroundDiv>
   );
 };

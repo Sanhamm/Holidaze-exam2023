@@ -6,7 +6,9 @@ import HeroImg from "./HeroPic";
 import FilterSearch from "./FilterSaerch";
 
 const HomeIndex = () => {
-  const { data, isLoading, isError } = useApi(URL_ALL_LISTINGS);
+  const { data, isLoading, isError } = useApi(
+    URL_ALL_LISTINGS + "?_owner=true"
+  );
 
   if (isLoading) {
     return "Loadin...";

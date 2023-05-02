@@ -22,7 +22,9 @@ const VenueInfo = ({ data }) => {
             src={data.owner.avatar === null ? NoAvatar : data.owner.avatar}
             alt={data.owner.name}
           />
-          <PAvatar>{data.owner.name}</PAvatar>
+          <PAvatar to={`/Profile/${data.owner.name}`}>
+            {data.owner.name}
+          </PAvatar>
         </FlexDiv>
         <GridProfileDiv>
           <div>

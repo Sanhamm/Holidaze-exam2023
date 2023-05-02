@@ -1,7 +1,8 @@
 import React from "react";
+import AddVenueIndex from "../Components/addVenue";
 
 const AddVenue = () => {
-  return <div></div>;
+  return <AddVenueIndex />;
 };
 
 export default AddVenue;

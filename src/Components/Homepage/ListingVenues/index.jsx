@@ -20,10 +20,10 @@ const VenuesListing = ({ venues }) => {
           <CardStyle
             key={idx}
             cover={
-              venue.media ? (
-                <ImgCard src={venue.media[0]} alt={venue.name} />
-              ) : (
+              venue.media.length === 0 ? (
                 <ImgCard src={noImage} alt='nothing to see yet' />
+              ) : (
+                <ImgCard src={venue.media[0]} alt={venue.name} />
               )
             }
           >

@@ -1,5 +1,6 @@
 import { Carousel } from "antd";
 import React, { useRef } from "react";
+import noImg from "../../../media/NoMedia.png";
 import {
   CarouselDiv,
   CarouselPhoto,
@@ -10,15 +11,21 @@ import {
 } from "./style";
 const CarouselImg = ({ media }) => {
   const slider = useRef(null);
+  console.log(media.length);
+
   return (
     <CarouselDiv>
       <PrevDivBtn>
         <LeftArrow onClick={() => slider.current.prev()} />
       </PrevDivBtn>
       <Carousel effect='fade' ref={slider}>
-        {media.map((img, idx) => {
-          return <CarouselPhoto src={img} alt={idx} />;
-        })}
+        {media.length === 0 ? (
+          <CarouselPhoto src={noImg} alt='no image avalible' />
+        ) : (
+          media.map((img, idx) => {
+            return <CarouselPhoto src={img} alt={idx} />;
+          })
+        )}
       </Carousel>
       <NextDivBtn>
         <RightArrow onClick={() => slider.current.next()} />

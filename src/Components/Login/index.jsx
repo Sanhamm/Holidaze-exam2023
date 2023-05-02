@@ -16,7 +16,6 @@ import { schema } from "./schema";
 import usePostApi from "../../Hooks/usePostApi";
 import { URL_LOGIN } from "../../Utils/Url";
 import useLocalestorage from "../../Hooks/useLoacalestorage";
-import { Avatar } from "antd";
 
 const Loginindex = () => {
   const {
@@ -27,7 +26,7 @@ const Loginindex = () => {
     resolver: yupResolver(schema),
   });
 
-  const { data, isError, postData } = usePostApi();
+  const { data, response, isError, postData } = usePostApi();
   const [accessToken, setAccessToken] = useLocalestorage("accessToken");
   const [email, setEmail] = useLocalestorage("email");
   const [name, setName] = useLocalestorage("name");
@@ -35,7 +34,6 @@ const Loginindex = () => {
   const [venueManager, setVenueManager] = useLocalestorage("venueManager");
 
   async function onSubmit(loginUser) {
-    console.log(loginUser);
     const options = {
       method: "POST",
       headers: {
@@ -50,7 +48,6 @@ const Loginindex = () => {
     }
   }
   useEffect(() => {
-    console.log(data);
     if (data) {
       setAccessToken(data.accessToken);
       setEmail(data.email);
@@ -60,6 +57,10 @@ const Loginindex = () => {
     }
   }, [data]);
 
+  if (response.status === 200) {
+    window.location.href = "/";
+  }
+
   return (
     <LoginDiv>
       <LogoLogin src={Logo} alt='Logo of holidaze' />
@@ -67,7 +68,11 @@ const Loginindex = () => {
       <InputDiv>
         <InputDefault {...register("email")} placeholder='Username' />
         <span>{errors.email?.message}</span>
-        <InputDefault {...register("password")} placeholder='Password' />
+        <InputDefault
+          type='password'
+          {...register("password")}
+          placeholder='Password'
+        />
         <span>{errors.password?.message}</span>
       </InputDiv>
       <InputDiv>

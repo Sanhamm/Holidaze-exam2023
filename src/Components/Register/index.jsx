@@ -27,8 +27,7 @@ const RegisterIndex = () => {
     resolver: yupResolver(schema),
   });
 
-  const { data, isError, postData } = usePostApi();
-
+  const { response, isError, postData } = usePostApi();
   async function onSubmit(registerUser) {
     console.log(registerUser);
     const options = {
@@ -43,8 +42,9 @@ const RegisterIndex = () => {
     if (isError) {
       console.warn(isError);
     }
-
-    console.log(data);
+  }
+  if (response.status === 201) {
+    window.location.href = "/Login";
   }
 
   return (
