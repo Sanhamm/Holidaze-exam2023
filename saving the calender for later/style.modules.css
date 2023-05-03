@@ -1,0 +1,49 @@
+
+.ant-picker-focused {
+    border-color: #ffbd3d;
+}
+
+.ant-picker-range .ant-picker-active-bar {
+    background: #ffbd3d;
+}
+
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner{
+    background: #ffbd3d;
+}
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
+    background: #ffbd3d;
+}
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner{
+
+    background: #ffbd3d;
+
+}
+.ant-picker{
+    border-radius: 0px;
+    padding: 10px;
+}
+.ant-picker:hover{
+    border-color: #ffbd3d;
+}
+.ant-picker-dropdown .ant-picker-panel-container{
+ border: 1px solid #ffbd3d;
+ border-radius: 0px;
+
+}
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range::before{
+
+    background: #ffbd3d;
+    opacity: 0.4;
+}
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single)::before{
+    background: #ffbd3d;
+
+}
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single)::hover{
+
+    background: #ffbd3d;
+
+}
+.ant-picker-cell .ant-picker-cell-in-view .ant-picker-cell-range-hover-end .ant-picker-cell-selected{
+    background-color: #ffbd3d;
+}
