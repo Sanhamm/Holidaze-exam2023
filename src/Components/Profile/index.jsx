@@ -15,9 +15,10 @@ import {
   RentOutBtn,
 } from "./style";
 import TabsInfo from "./tabs";
+import LoaderSpinner from "../Loader";
 
 const ProfileSite = () => {
-  const { data, isError, postData } = usePostApi();
+  const { data, isError, isLoading, postData } = usePostApi();
   const { name } = useParams();
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const profileName = JSON.parse(localStorage.getItem("name"));
@@ -32,8 +33,11 @@ const ProfileSite = () => {
       body: JSON.stringify(profileData),
     };
     await postData(`${URL_PROFILE}/${name}?_venues=true`, options);
+    if (isLoading) {
+      return <LoaderSpinner />;
+    }
     if (isError) {
-      console.warn(isError);
+      return;
     }
   }
   useEffect(() => {

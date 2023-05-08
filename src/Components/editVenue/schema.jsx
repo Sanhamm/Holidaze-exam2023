@@ -1,16 +1,9 @@
 import * as yup from "yup";
-// eslint-disable-next-line
+
 export const schema = yup
   .object({
     name: yup.string().required("Please enter venue name"),
-    media: yup
-      .array()
-      .of(
-        yup
-          .string()
-          .required("Must add a picture")
-          .url("please enter a valid URL")
-      ),
+    media: yup.array().of(yup.string().url("please enter a valid URL")),
     description: yup.string().required("Must have a description"),
     price: yup
       .number(0)

@@ -14,7 +14,7 @@ import "./style.css";
 import { Link } from "react-router-dom";
 const VenuesListing = ({ venues }) => {
   return (
-    <CardGrid>
+    <CardGrid id='scrollDown'>
       {venues.map((venue, idx) => {
         return (
           <CardStyle

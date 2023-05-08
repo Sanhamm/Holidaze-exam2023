@@ -11,11 +11,23 @@ import {
 } from "./style";
 import { FlexDiv } from "./style";
 import NoAvatar from "../../../media/blank-profile-picture-gc1cc27fcf_1280.png";
+import { VenuButton } from "../../GlobalStyle";
+import { Link } from "react-router-dom";
+
 const VenueInfo = ({ data }) => {
+  const name = JSON.parse(localStorage.getItem("name"));
+  console.log(data);
   return (
     <DivAllInfo>
       <H1VenueInfo>{data.name}</H1VenueInfo>
       <PVenueInfo>{data.description}</PVenueInfo>
+      {data.owner.name === name ? (
+        <Link to={`/EditVenue/${data.id}`} state={{ data }}>
+          <VenuButton>Edit</VenuButton>
+        </Link>
+      ) : (
+        ""
+      )}
       <div>
         <FlexDiv>
           <ProfileAvatar

@@ -6,13 +6,13 @@ import {
   EditDiv,
   EditImg,
   InputDefault,
+  LinkStyled,
 } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
 import { useForm } from "react-hook-form";
 import usePostApi from "../../Hooks/usePostApi";
 import { URL_PROFILE } from "../../Utils/Url";
-import { Link } from "react-router-dom";
 import useLocalStorage from "../../Hooks/useLoacalestorage";
 
 const EditAvatarIndex = () => {
@@ -51,23 +51,27 @@ const EditAvatarIndex = () => {
   }
   console.log(data);
   console.log(response);
+
   useEffect(() => {
     if (data) {
       setAvatar(data.avatar);
     }
   }, [data]);
 
+  if (response.ok) {
+    window.location.href = `/Profile/${name}`;
+  }
+
   return (
     <EditDiv>
       <EditImg src={avatarPic} alt='Avatar of your profile' />
       <span>{errors.avatar?.message}</span>
-      <InputDefault {...register("avatar")} type='url' />
+      <InputDefault {...register("avatar")} type='url' placeholder={avatar} />
       <BtnDiv>
         <EditButton onClick={handleSubmit(onSubmit)}>Edit avatar</EditButton>
-        <CancelBtn>
-          {" "}
-          <Link to={`/profile/${name}`}>Cancel</Link>
-        </CancelBtn>
+        <LinkStyled to={`/profile/${name}`}>
+          <CancelBtn>Cancel</CancelBtn>
+        </LinkStyled>
       </BtnDiv>
     </EditDiv>
   );

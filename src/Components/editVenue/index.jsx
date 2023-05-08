@@ -1,60 +1,67 @@
 import React, { useState } from "react";
+import {
+  AddMoreBTn,
+  CheckBoxDiv,
+  ErrorMsg,
+  H1Venue,
+  InputDefault,
+  InputDiv,
+  LabelStyled,
+  LogoVenue,
+  TextArea,
+  VenuButton,
+} from "../GlobalStyle";
 import Logo from "../../media/Holidaze.svg";
+import usePostApi from "../../Hooks/usePostApi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
 import { useForm } from "react-hook-form";
-
-import {
-  AddVenueDiv,
-  CheckBoxDiv,
-  H1AddVenue,
-  InputDefault,
-  LabelStyled,
-  LogoAddVenue,
-  TextArea,
-  InputDiv,
-  AddVenuButton,
-  AddMoreBTn,
-  ErrorMsg,
-} from "./style";
-import usePostApi from "../../Hooks/usePostApi";
 import { URL_POST_VENUES } from "../../Utils/Url";
+import { useParams } from "react-router-dom";
+import useApi from "../../Hooks/useApi";
 
-const AddVenueIndex = () => {
+const EditVenueIndex = () => {
+  const { id } = useParams();
+
   const [inputFields, setInputFields] = useState([{ id: 1, name: "input-1" }]);
   const { data, response, isError, postData } = usePostApi();
+  const { dataInfo } = useApi(`${URL_POST_VENUES}/${id}`);
+  console.log(dataInfo);
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
-  console.log(accessToken);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: dataInfo
+      ? {
+          name: dataInfo.name,
+          description: dataInfo.description,
+          price: dataInfo.price,
+          maxGuests: dataInfo.maxGuests,
+        }
+      : {},
   });
 
   async function onSubmit(addVenue) {
     console.log(addVenue);
     const options = {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify(addVenue),
     };
-    await postData(URL_POST_VENUES, options);
+    await postData(`${URL_POST_VENUES}/${id}`, options);
 
     if (isError) {
       console.warn(isError);
     }
   }
   console.log(response);
-
-  if (response.status === 201) {
-    window.location.href = `/Venue/${data.id}`;
-  }
+  console.log(data);
 
   const addInputField = () => {
     const newInputId = inputFields.length + 1;
@@ -64,12 +71,17 @@ const AddVenueIndex = () => {
     };
     setInputFields([...inputFields, newInput]);
   };
+
   return (
-    <AddVenueDiv>
-      <LogoAddVenue src={Logo} alt='Logo of holidaze' />
-      <H1AddVenue>Add a venue</H1AddVenue>
+    <InputDiv>
+      <LogoVenue src={Logo} alt='Logo of holidaze' />
+      <H1Venue>Edit your venue</H1Venue>
       <ErrorMsg>{errors.name?.message}</ErrorMsg>
-      <InputDefault {...register("name")} type='text' placeholder='Title' />
+      <InputDefault
+        {...register("name")}
+        placeholder='Title'
+        defaultValue={dataInfo?.name}
+      />
       {inputFields.map((inputField, index) => (
         <div key={`image-${index}`}>
           {" "}
@@ -80,43 +92,52 @@ const AddVenueIndex = () => {
             name={inputField.name}
             placeholder='Image Url'
             {...register(`media[${index}]`)}
+            defaultValue={dataInfo?.media}
           />
         </div>
       ))}
       <AddMoreBTn onClick={addInputField}>+ Add Input Field</AddMoreBTn>
+
       <TextArea
-        name='Description'
+        name='description'
         id=''
         cols='30'
         rows='10'
         {...register("description")}
-      ></TextArea>
+        defaultValue={dataInfo?.description}
+      />
       <ErrorMsg>{errors.description?.message}</ErrorMsg>
-      <InputDefault {...register("price")} type='number' placeholder='Price' />
+
+      <InputDefault
+        {...register("price")}
+        type='number'
+        placeholder='Price'
+        defaultValue={dataInfo?.price}
+      />
       <ErrorMsg>{errors.price?.message}</ErrorMsg>
       <InputDefault
         {...register("maxGuests")}
         type='number'
         placeholder='Max guest'
+        defaultValue={dataInfo?.maxGuests}
       />
       <ErrorMsg>{errors.maxGuests?.message}</ErrorMsg>
+
       <CheckBoxDiv>
-        <input {...register("meta.wifi")} type='checkbox' id='wifi' />
+        <input {...register("name")} type='checkbox' id='wifi' />
         <LabelStyled htmlFor='wifi'>Wifi</LabelStyled>
-        <input {...register("meta.parking")} type='checkbox' id='parking' />
+        <input {...register("name")} type='checkbox' id='parking' />
         <LabelStyled htmlFor='parking'>Parking</LabelStyled>
-        <input {...register("meta.breakfast")} type='checkbox' id='breakfast' />
+        <input {...register("name")} type='checkbox' id='breakfast' />
         <LabelStyled htmlFor='breakfast'>Breakfast</LabelStyled>
-        <input {...register("meta.pets")} type='checkbox' id='pets' />
+        <input {...register("name")} type='checkbox' id='pets' />
         <LabelStyled htmlFor='pets'>Pets</LabelStyled>
       </CheckBoxDiv>
       <InputDiv>
-        <AddVenuButton onClick={handleSubmit(onSubmit)}>
-          Add venue
-        </AddVenuButton>
+        <VenuButton onClick={handleSubmit(onSubmit)}>Edit venue</VenuButton>
       </InputDiv>
-    </AddVenueDiv>
+    </InputDiv>
   );
 };
 
-export default AddVenueIndex;
+export default EditVenueIndex;

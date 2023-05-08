@@ -4,6 +4,7 @@ import { URL_ALL_LISTINGS } from "../../Utils/Url";
 import VenuesListing from "./ListingVenues";
 import HeroImg from "./HeroPic";
 import FilterSearch from "./FilterSaerch";
+import LoaderSpinner from "../Loader";
 
 const HomeIndex = () => {
   const { data, isLoading, isError } = useApi(
@@ -11,7 +12,7 @@ const HomeIndex = () => {
   );
 
   if (isLoading) {
-    return "Loadin...";
+    return <LoaderSpinner />;
   }
   if (isError) {
     console.log(isError);

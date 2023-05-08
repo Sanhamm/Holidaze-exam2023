@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const EditDiv = styled.div`
@@ -27,11 +28,17 @@ export const CancelBtn = styled.button`
   background-color: transparent;
   color: white;
   border: none;
+  text-align: center;
   &:hover {
     cursor: pointer;
     color: grey;
     text-decoration: underline;
   }
+`;
+
+export const LinkStyled = styled(Link)`
+  text-align: center;
+  margin: auto;
 `;
 
 export const EditButton = styled.button`

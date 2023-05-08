@@ -4,6 +4,7 @@ import useApi from "../../Hooks/useApi";
 import { URL_ALL_LISTINGS } from "../../Utils/Url";
 import CarouselImg from "./picCarousel";
 import VenueInfo from "./VenueInfo";
+import LoaderSpinner from "../Loader";
 
 const VenueSiteIndex = () => {
   const { id } = useParams();
@@ -12,7 +13,7 @@ const VenueSiteIndex = () => {
   );
 
   if (isLoading) {
-    return "loadin..";
+    return <LoaderSpinner />;
   }
   if (isError) {
     console.error(isError);

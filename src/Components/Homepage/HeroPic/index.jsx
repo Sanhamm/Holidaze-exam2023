@@ -22,7 +22,7 @@ const HeroImg = () => {
           <span style={{ color: "#ffcb65" }}> Premium </span>Homes
         </PHero>
         <ButtonHeroGrid>
-          <RentVenueButton>Rent venue</RentVenueButton>
+          <RentVenueButton href='#scrollDown'>Rent venue</RentVenueButton>
           <Link to='/AddVenue'>
             <RentOutButton>Rent out</RentOutButton>
           </Link>
