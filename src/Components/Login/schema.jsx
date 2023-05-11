@@ -1,12 +1,12 @@
 import * as yup from "yup";
 
-const emailRegex = "stud.noroff.no";
+const emailRegex = /^[a-zA-Z0-9._%+-]+@(?:stud\.)?noroff\.no$/;
 
 export const schema = yup
   .object({
     email: yup
       .string()
-      .matches(emailRegex, "Must be a stud.noroff.no email")
+      .matches(emailRegex, "Must be a stud.noroff.no of noroff.no email")
       .required("Please fill in subject"),
     password: yup
       .string()

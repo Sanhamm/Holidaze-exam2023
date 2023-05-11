@@ -66,3 +66,31 @@ export const DivAllInfo = styled.div`
     margin: 40px;
   }
 `;
+
+export const DltBtn = styled.button`
+  padding: 10px 30px;
+  border-radius: 0;
+  border: 1px solid #e54e1f;
+  background-color: #e54e1f;
+  &:hover {
+    cursor: pointer;
+    background-color: #ec6b42;
+    border: 1px solid #ec6b42;
+  }
+`;
+
+export const DivBtns = styled.div`
+  max-width: 1060px;
+  margin: auto auto 40px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`;
+
+export const BookingsTitle = styled.h1`
+  color: #ffcb65;
+  margin-bottom: 30px;
+`;
+
+export const CalenderDiv = styled.div`
+  margin-bottom: 20px;
+`;

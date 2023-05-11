@@ -16,11 +16,13 @@ import {
 } from "./style";
 import TabsInfo from "./tabs";
 import LoaderSpinner from "../Loader";
+// import useGet from "../../Hooks/useGet";
 
 const ProfileSite = () => {
   const { data, isError, isLoading, postData } = usePostApi();
+  const accessToken = JSON.parse(localStorage.getItem("accessTokne"));
+  // const [getData, data, error] = useGet();
   const { name } = useParams();
-  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const profileName = JSON.parse(localStorage.getItem("name"));
 
   async function getProfile(profileData) {
@@ -32,7 +34,10 @@ const ProfileSite = () => {
       },
       body: JSON.stringify(profileData),
     };
-    await postData(`${URL_PROFILE}/${name}?_venues=true`, options);
+    await postData(
+      `${URL_PROFILE}/${name}?_venues=true&_bookings=true`,
+      options
+    );
     if (isLoading) {
       return <LoaderSpinner />;
     }
@@ -42,7 +47,14 @@ const ProfileSite = () => {
   }
   useEffect(() => {
     getProfile();
+    // getData(`${URL_PROFILE}/${name}?_venues=true&_bookings=true`);
   }, [name]);
+
+  // if (error) {
+  //   console.log(error);
+  // }
+
+  console.log(data);
 
   return (
     <div>

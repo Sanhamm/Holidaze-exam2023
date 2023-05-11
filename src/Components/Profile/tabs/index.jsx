@@ -52,10 +52,41 @@ const TabsInfo = ({ data, profileName }) => {
             </CardGrid>
           </TabsLi>
           <TabsLi tab='Bookings' key={2}>
-            tab 2
-          </TabsLi>
-          <TabsLi tab='Favourites' key={3}>
-            tab 3
+            <CardGrid>
+              {data?.bookings.map((booking, idx) => {
+                console.log(booking.venue);
+                return (
+                  <CardStyle
+                    key={idx}
+                    cover={
+                      booking.venue.media.length === 0 ? (
+                        <ImgCard src={noImage} alt='nothing to see' />
+                      ) : (
+                        <ImgCard
+                          src={booking.venue.media[0]}
+                          alt={booking.venue.name}
+                        />
+                      )
+                    }
+                  >
+                    <H1CardStyle>{booking.venue.name}</H1CardStyle>
+                    <PCardStyle>Guests: {booking.venue.maxGuests}</PCardStyle>
+                    <PCardStyle>
+                      includes: {booking.venue.meta.wifi ? "Wifi" : ""}
+                      {booking.venue.meta.parking ? " Parking" : ""}
+                      {booking.venue.meta.breakfast ? " Breakfast" : ""}
+                      {booking.venue.meta.pets ? " Pets" : ""}
+                    </PCardStyle>
+                    <CardDivPriceButton>
+                      <PriceCardStyle>{booking.venue.price},-</PriceCardStyle>
+                      <Link to={`/Venue/${booking.venue.id}`}>
+                        <ButtonCardStyle>Show Venue</ButtonCardStyle>
+                      </Link>
+                    </CardDivPriceButton>
+                  </CardStyle>
+                );
+              })}
+            </CardGrid>
           </TabsLi>
         </StyledTabs>
       ) : (

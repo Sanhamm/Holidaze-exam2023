@@ -1,4 +1,11 @@
+
 body {
     margin: 0;
     background-color: #292929;
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+}
+
+@font-face {
+    font-family: 'Nunito Sans', sans-serif;
+    src: url(https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&family=Poppins&display=swap);
 }
