@@ -1,0 +1,32 @@
+.ant-modal .ant-modal-content {
+    background-color: #292929;
+  }
+
+  .ant-btn-primary{
+
+    color: black;
+    background-color: #ffcb5d;
+    
+  }
+  .ant-btn-primary:hover {
+    background-color: #fed47a !important;
+    color: black !important;
+
+  }
+  .ant-btn{
+    border-radius: 0px;
+
+  }
+
+  .ant-btn-default{
+    background-color: transparent;
+    color: #ffcb5d;
+    border-color: #ffcb5d;
+  }
+  
+  .ant-btn-default:hover{
+    color: transparent !important;
+    background-color: #fed47a !important;
+    border-color: transparent !important;
+
+  }

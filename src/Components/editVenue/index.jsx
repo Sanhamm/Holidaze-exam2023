@@ -19,49 +19,40 @@ import { useForm } from "react-hook-form";
 import { URL_POST_VENUES } from "../../Utils/Url";
 import { useParams } from "react-router-dom";
 import useApi from "../../Hooks/useApi";
+import useApiMethod from "../../Hooks/useApiMehod";
 
 const EditVenueIndex = () => {
   const { id } = useParams();
 
   const [inputFields, setInputFields] = useState([{ id: 1, name: "input-1" }]);
-  const { data, response, isError, postData } = usePostApi();
-  const { dataInfo } = useApi(`${URL_POST_VENUES}/${id}`);
+  const [fetchData, dataInfo, isError, response] = useApiMethod();
+  const { data } = useApi(`${URL_POST_VENUES}/${id}`);
   console.log(dataInfo);
-  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: dataInfo
+    defaultValues: data
       ? {
-          name: dataInfo.name,
-          description: dataInfo.description,
-          price: dataInfo.price,
-          maxGuests: dataInfo.maxGuests,
+          name: data.name,
+          description: data.description,
+          price: data.price,
+          maxGuests: data.maxGuests,
         }
       : {},
   });
 
-  async function onSubmit(addVenue) {
-    console.log(addVenue);
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(addVenue),
-    };
-    await postData(`${URL_POST_VENUES}/${id}`, options);
-
-    if (isError) {
-      console.warn(isError);
-    }
+  const handleEdit = (editInfo) => {
+    fetchData(`${URL_POST_VENUES}/${id}`, "PUT", editInfo);
+  };
+  if (isError) {
+    console.warn(isError);
   }
-  console.log(response);
-  console.log(data);
+  if (response?.status === 200) {
+    window.location.href = `/Venue/${id}`;
+  }
 
   const addInputField = () => {
     const newInputId = inputFields.length + 1;
@@ -80,7 +71,7 @@ const EditVenueIndex = () => {
       <InputDefault
         {...register("name")}
         placeholder='Title'
-        defaultValue={dataInfo?.name}
+        defaultValue={data?.name}
       />
       {inputFields.map((inputField, index) => (
         <div key={`image-${index}`}>
@@ -92,7 +83,7 @@ const EditVenueIndex = () => {
             name={inputField.name}
             placeholder='Image Url'
             {...register(`media[${index}]`)}
-            defaultValue={dataInfo?.media}
+            defaultValue={data?.media}
           />
         </div>
       ))}
@@ -104,7 +95,7 @@ const EditVenueIndex = () => {
         cols='30'
         rows='10'
         {...register("description")}
-        defaultValue={dataInfo?.description}
+        defaultValue={data?.description}
       />
       <ErrorMsg>{errors.description?.message}</ErrorMsg>
 
@@ -112,14 +103,14 @@ const EditVenueIndex = () => {
         {...register("price")}
         type='number'
         placeholder='Price'
-        defaultValue={dataInfo?.price}
+        defaultValue={data?.price}
       />
       <ErrorMsg>{errors.price?.message}</ErrorMsg>
       <InputDefault
         {...register("maxGuests")}
         type='number'
         placeholder='Max guest'
-        defaultValue={dataInfo?.maxGuests}
+        defaultValue={data?.maxGuests}
       />
       <ErrorMsg>{errors.maxGuests?.message}</ErrorMsg>
 
@@ -134,7 +125,7 @@ const EditVenueIndex = () => {
         <LabelStyled htmlFor='pets'>Pets</LabelStyled>
       </CheckBoxDiv>
       <InputDiv>
-        <VenuButton onClick={handleSubmit(onSubmit)}>Edit venue</VenuButton>
+        <VenuButton onClick={handleSubmit(handleEdit)}>Edit venue</VenuButton>
       </InputDiv>
     </InputDiv>
   );

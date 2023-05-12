@@ -1,10 +1,12 @@
 import { useState } from "react";
 
-const useApiMehod = () => {
+const useApiMethod = () => {
+  const [isError, setIsError] = useState(null);
+  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+  const [dataInfo, setDataInfo] = useState(null);
   const [response, setResponse] = useState(null);
-  const [error, setError] = useState(null);
-  const accessToken = localStorage.getItem("accessToken");
-  const [data, setData] = useState(null);
+  const name = JSON.parse(localStorage.getItem("name"));
+
   const fetchData = async (url, method, data) => {
     try {
       const postData = {
@@ -17,15 +19,19 @@ const useApiMehod = () => {
       };
       const response = await fetch(url, postData);
       const json = await response.json();
+      console.log(json.avatar);
+      console.log(response);
+      setDataInfo(json);
       setResponse(response);
-      setData(json);
-      window.location.reload();
     } catch (error) {
-      setError(error);
+      setIsError(error);
+    }
+    if (method === "DELETE") {
+      window.location.href = `/Profile/${name}`;
     }
   };
 
-  return [fetchData, response, data, error];
+  return [fetchData, dataInfo, isError, response];
 };
 
-export default useApiMehod;
+export default useApiMethod;

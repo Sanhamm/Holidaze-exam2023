@@ -54,7 +54,7 @@ const TabsInfo = ({ data, profileName }) => {
           <TabsLi tab='Bookings' key={2}>
             <CardGrid>
               {data?.bookings.map((booking, idx) => {
-                console.log(booking.venue);
+                //console.log(booking.venue);
                 return (
                   <CardStyle
                     key={idx}

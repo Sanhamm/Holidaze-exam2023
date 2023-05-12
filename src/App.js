@@ -7,7 +7,6 @@ import Register from "./Pages/Register";
 import Profile from "./Pages/Profile";
 import AddVenue from "./Pages/AddVenue";
 import Venue from "./Pages/Venue";
-import EditAvatar from "./Pages/EditAvatar";
 import EditVenue from "./Pages/EditVenue";
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
         <Route path='/Profile/:name' element={<Profile />} />
         <Route path='/AddVenue' element={<AddVenue />} />
         <Route path='/Venue/:id' element={<Venue />} />
-        <Route path='/EditAvatar' element={<EditAvatar />} />
         <Route path='/EditVenue/:id' element={<EditVenue />} />
       </Routes>
     </Layout>

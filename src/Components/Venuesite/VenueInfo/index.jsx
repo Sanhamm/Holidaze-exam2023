@@ -17,29 +17,16 @@ import NoAvatar from "../../../media/blank-profile-picture-gc1cc27fcf_1280.png";
 import { VenuButton } from "../../GlobalStyle";
 import { Link } from "react-router-dom";
 import { URL_POST_VENUES } from "../../../Utils/Url";
-import usePostApi from "../../../Hooks/usePostApi";
 import BookingCalender from "./Calender";
+import useApiMethod from "../../../Hooks/useApiMehod";
 const VenueInfo = ({ data, id }) => {
   const name = JSON.parse(localStorage.getItem("name"));
-  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
-  const { postData } = usePostApi();
+  const [fetchData] = useApiMethod();
 
-  console.log(data);
+  const handleDelete = () => {
+    fetchData(`${URL_POST_VENUES}/${id}`, "DELETE");
+  };
 
-  async function onSubmit() {
-    console.log("deleteVenue");
-    const options = {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    await postData(`${URL_POST_VENUES}/${id}`, options);
-
-    window.location.href = `/Profile/${name}`;
-  }
-  console.log(id);
   return (
     <DivAllInfo>
       <H1VenueInfo>{data.name}</H1VenueInfo>
@@ -88,7 +75,7 @@ const VenueInfo = ({ data, id }) => {
         )}
         {data.owner.name === name ? (
           <Link>
-            <DltBtn onClick={onSubmit}>Delete</DltBtn>
+            <DltBtn onClick={handleDelete}>Delete</DltBtn>
           </Link>
         ) : (
           ""

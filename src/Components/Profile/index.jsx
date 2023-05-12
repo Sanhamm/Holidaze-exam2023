@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import usePostApi from "../../Hooks/usePostApi";
+import React, { useEffect, useState } from "react";
 import { URL_PROFILE } from "../../Utils/Url";
 import { Link, useParams } from "react-router-dom";
 import noAvatar from "../../media/blank-profile-picture-gc1cc27fcf_1280.png";
@@ -15,53 +14,57 @@ import {
   RentOutBtn,
 } from "./style";
 import TabsInfo from "./tabs";
+import useGet from "../../Hooks/useGet";
 import LoaderSpinner from "../Loader";
-// import useGet from "../../Hooks/useGet";
+import ModalEdit from "./editModal";
+import useApiMethod from "../../Hooks/useApiMehod";
+import useLocalStorage from "../../Hooks/useLoacalestorage";
 
 const ProfileSite = () => {
-  const { data, isError, isLoading, postData } = usePostApi();
-  const accessToken = JSON.parse(localStorage.getItem("accessTokne"));
-  // const [getData, data, error] = useGet();
+  const [getData, data] = useGet();
+  const [fetchData, dataInfo, isError, response] = useApiMethod();
+  const [avatar, setAvatar] = useLocalStorage("avatar");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = (data) => {
+    fetchData(`${URL_PROFILE}/${name}/media`, "PUT", data);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   const { name } = useParams();
   const profileName = JSON.parse(localStorage.getItem("name"));
 
-  async function getProfile(profileData) {
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(profileData),
-    };
-    await postData(
-      `${URL_PROFILE}/${name}?_venues=true&_bookings=true`,
-      options
-    );
-    if (isLoading) {
-      return <LoaderSpinner />;
-    }
-    if (isError) {
-      return;
-    }
-  }
   useEffect(() => {
-    getProfile();
-    // getData(`${URL_PROFILE}/${name}?_venues=true&_bookings=true`);
+    getData(`${URL_PROFILE}/${name}?_venues=true&_bookings=true`);
   }, [name]);
 
-  // if (error) {
-  //   console.log(error);
-  // }
-
-  console.log(data);
+  if (!data) {
+    return <LoaderSpinner />;
+  }
+  if (isError) {
+    console.log(isError);
+  }
+  if (dataInfo) {
+    setAvatar(dataInfo.avatar);
+  }
+  if (response?.status === 200) {
+    window.location.reload();
+  }
 
   return (
     <div>
       <ProfileInfo>
         <ProfileInfoAvatar>
           <AvatarImg
-            src={data?.avatar === null ? noAvatar : data?.avatar}
+            src={
+              data?.avatar === null || data?.avatar === ""
+                ? noAvatar
+                : data?.avatar
+            }
             alt={data?.name}
           />
         </ProfileInfoAvatar>
@@ -75,9 +78,7 @@ const ProfileSite = () => {
         </InfoDiv>
         <BtnDiv>
           {name === profileName ? (
-            <Link to={"/EditAvatar"}>
-              <EditBtn>Edit avatar</EditBtn>
-            </Link>
+            <EditBtn onClick={showModal}>Edit avatar</EditBtn>
           ) : (
             ""
           )}
@@ -89,6 +90,13 @@ const ProfileSite = () => {
         </BtnDiv>
       </ProfileInfo>
       <TabsInfo data={data} profileName={profileName} />
+      <ModalEdit
+        modal={isModalOpen}
+        handleCanecel={handleCancel}
+        handleOk={handleOk}
+        data={data}
+        name={profileName}
+      />
     </div>
   );
 };

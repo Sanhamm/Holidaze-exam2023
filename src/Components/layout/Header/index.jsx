@@ -38,7 +38,7 @@ const Header = () => {
               }
             }}
           >
-            {avatar === "" ? (
+            {avatar === null || avatar === "" ? (
               <UserIcon />
             ) : (
               <AvatarImg src={avatar} alt='avatar for user' />

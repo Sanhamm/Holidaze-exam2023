@@ -3,14 +3,14 @@ import React, { useState } from "react";
 const useGet = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const token = localStorage.getItem("token");
+  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 
   const getData = async (url) => {
     try {
       const postData = {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       };
       const response = await fetch(url, postData);

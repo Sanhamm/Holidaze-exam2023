@@ -19,10 +19,12 @@ import {
 } from "./style";
 import usePostApi from "../../Hooks/usePostApi";
 import { URL_POST_VENUES } from "../../Utils/Url";
+import useApiMethod from "../../Hooks/useApiMehod";
 
 const AddVenueIndex = () => {
   const [inputFields, setInputFields] = useState([{ id: 1, name: "input-1" }]);
-  const { data, response, isError, postData } = usePostApi();
+  // const { data, response, isError, postData } = usePostApi();
+  const [fetchData, dataInfo, isError, response] = useApiMethod();
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   console.log(accessToken);
 
@@ -34,26 +36,33 @@ const AddVenueIndex = () => {
     resolver: yupResolver(schema),
   });
 
-  async function onSubmit(addVenue) {
-    console.log(addVenue);
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(addVenue),
-    };
-    await postData(URL_POST_VENUES, options);
+  const handleAdd = (data) => {
+    fetchData(URL_POST_VENUES, "POST", data);
+  };
 
-    if (isError) {
-      console.warn(isError);
-    }
+  // async function onSubmit(addVenue) {
+  //   console.log(addVenue);
+  //   const options = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //     body: JSON.stringify(addVenue),
+  //   };
+  //   await postData(URL_POST_VENUES, options);
+
+  //   if (isError) {
+  //     console.warn(isError);
+  //   }
+  // }
+  // console.log(response);
+  if (isError) {
+    console.log(isError);
   }
-  console.log(response);
 
-  if (response.status === 201) {
-    window.location.href = `/Venue/${data.id}`;
+  if (response?.status === 201) {
+    window.location.href = `/Venue/${dataInfo.id}`;
   }
 
   const addInputField = () => {
@@ -111,7 +120,7 @@ const AddVenueIndex = () => {
         <LabelStyled htmlFor='pets'>Pets</LabelStyled>
       </CheckBoxDiv>
       <InputDiv>
-        <AddVenuButton onClick={handleSubmit(onSubmit)}>
+        <AddVenuButton onClick={handleSubmit(handleAdd)}>
           Add venue
         </AddVenuButton>
       </InputDiv>
