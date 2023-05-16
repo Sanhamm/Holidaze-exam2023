@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  BookingsTitle,
   DivAllInfo,
   DivBtns,
   DltBtn,
+  EditBtn,
+  EditIcon,
   GridProfileDiv,
   GuestPTag,
   GuestSpanProfile,
@@ -22,6 +23,7 @@ import useApiMethod from "../../../Hooks/useApiMehod";
 const VenueInfo = ({ data, id }) => {
   const name = JSON.parse(localStorage.getItem("name"));
   const [fetchData] = useApiMethod();
+  const [openEdit, setOpenEdit] = useState(false);
 
   const handleDelete = () => {
     fetchData(`${URL_POST_VENUES}/${id}`, "DELETE");
@@ -29,6 +31,33 @@ const VenueInfo = ({ data, id }) => {
 
   return (
     <DivAllInfo>
+      {data.owner.name === name ? (
+        <EditIcon
+          onClick={() => {
+            if (openEdit === false) {
+              setOpenEdit(true);
+            } else {
+              setOpenEdit(false);
+            }
+          }}
+        />
+      ) : (
+        ""
+      )}
+      {openEdit ? (
+        <DivBtns>
+          <Link to={`/EditVenue/${data.id}`} state={{ data }}>
+            <EditBtn>Edit</EditBtn>
+          </Link>
+
+          <Link>
+            <DltBtn onClick={handleDelete}>Delete</DltBtn>
+          </Link>
+        </DivBtns>
+      ) : (
+        ""
+      )}
+
       <H1VenueInfo>{data.name}</H1VenueInfo>
       <PVenueInfo>{data.description}</PVenueInfo>
       <div>
@@ -60,27 +89,10 @@ const VenueInfo = ({ data, id }) => {
             </GuestPTag>
           </div>
           <div>
-            <BookingsTitle>Book this Venue</BookingsTitle>
-            <BookingCalender id={data.id} />
+            <BookingCalender id={data.id} data={data} />
           </div>
         </GridProfileDiv>
       </div>
-      <DivBtns>
-        {data.owner.name === name ? (
-          <Link to={`/EditVenue/${data.id}`} state={{ data }}>
-            <VenuButton>Edit</VenuButton>
-          </Link>
-        ) : (
-          ""
-        )}
-        {data.owner.name === name ? (
-          <Link>
-            <DltBtn onClick={handleDelete}>Delete</DltBtn>
-          </Link>
-        ) : (
-          ""
-        )}
-      </DivBtns>
     </DivAllInfo>
   );
 };

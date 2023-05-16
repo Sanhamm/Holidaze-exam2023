@@ -1,5 +1,7 @@
+import { SettingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const H1VenueInfo = styled.h1`
   text-align: center;
@@ -59,6 +61,9 @@ export const DivExtraInfo = styled.div`
 `;
 
 export const DivAllInfo = styled.div`
+  position: relative;
+  max-width: 1060px;
+  margin: 20px auto;
   @media (max-width: 1060px) {
     margin: 20px;
   }
@@ -68,22 +73,36 @@ export const DivAllInfo = styled.div`
 `;
 
 export const DltBtn = styled.button`
-  padding: 10px 30px;
+  color: #e54e1f;
   border-radius: 0;
-  border: 1px solid #e54e1f;
-  background-color: #e54e1f;
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  margin-left: 20px;
   &:hover {
     cursor: pointer;
-    background-color: #ec6b42;
-    border: 1px solid #ec6b42;
+    text-decoration: underline;
+  }
+`;
+
+export const EditBtn = styled.button`
+  color: white;
+  border-radius: 0;
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
   }
 `;
 
 export const DivBtns = styled.div`
-  max-width: 1060px;
-  margin: auto auto 40px auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  position: absolute;
+  padding: 10px;
+  background-color: rgb(41, 41, 41);
+  left: 38px;
+  top: -4px;
 `;
 
 export const BookingsTitle = styled.h1`
@@ -93,4 +112,14 @@ export const BookingsTitle = styled.h1`
 
 export const CalenderDiv = styled.div`
   margin-bottom: 20px;
+`;
+
+export const EditIcon = styled(SettingOutlined)`
+  color: #ededed;
+  font-size: 2rem;
+  transition: transform 2.7s ease-in-out;
+
+  &:hover {
+    transform: rotate(360deg);
+  }
 `;

@@ -18,7 +18,6 @@ const Header = () => {
   const accessToken = localStorage.getItem("accessToken");
   const userName = JSON.parse(localStorage.getItem("name"));
   const avatar = JSON.parse(localStorage.getItem("avatar"));
-  console.log(avatar);
 
   return (
     <BackgroundDiv>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeroDiv = styled.div``;
@@ -51,12 +52,15 @@ export const RentOutButton = styled.button`
     color: #ededed;
     cursor: pointer;
   }
+  @media (max-width: 760px) {
+    height: 50px;
+    padding: 15px;
+  }
 `;
 
 export const RentVenueButton = styled.button`
   border: 1px solid #ffcb65;
   background-color: #ffcb65;
-  padding: 15px 50px;
   &:hover {
     background-color: transparent;
     color: #ededed;
@@ -67,4 +71,13 @@ export const RentVenueButton = styled.button`
     color: black;
     cursor: pointer;
   }
+  @media (max-width: 760px) {
+    height: 50px;
+    padding: 0px;
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  color: #ededed;
+  text-decoration: none;
 `;

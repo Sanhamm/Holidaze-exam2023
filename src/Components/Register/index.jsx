@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { schema } from "./schema";
 import usePostApi from "../../Hooks/usePostApi";
 import { URL_REG } from "../../Utils/Url";
+import { ErrorMsg } from "../GlobalStyle";
 
 const RegisterIndex = () => {
   const {
@@ -53,17 +54,17 @@ const RegisterIndex = () => {
       <H1Register>Register</H1Register>
       <InputDiv>
         <InputDefault {...register("name")} placeholder='Username' />
-        <span>{errors.name?.message}</span>
+        <ErrorMsg>{errors.name?.message}</ErrorMsg>
         <InputDefault {...register("email")} placeholder='E-mail' />
-        <span>{errors.email?.message}</span>
+        <ErrorMsg>{errors.email?.message}</ErrorMsg>
         <InputDefault {...register("avatar")} placeholder='Avatar Url' />
-        <span>{errors.avatar?.message}</span>
+        <ErrorMsg>{errors.avatar?.message}</ErrorMsg>
         <InputDefault
           {...register("password")}
           placeholder='Password'
           type='password'
         />
-        <span>{errors.password?.message}</span>
+        <ErrorMsg>{errors.password?.message}</ErrorMsg>
       </InputDiv>
       <div>
         <InputCheckbox

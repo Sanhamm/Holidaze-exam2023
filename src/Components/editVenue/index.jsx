@@ -50,6 +50,7 @@ const EditVenueIndex = () => {
   if (isError) {
     console.warn(isError);
   }
+  console.log(response);
   if (response?.status === 200) {
     window.location.href = `/Venue/${id}`;
   }

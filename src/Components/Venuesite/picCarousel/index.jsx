@@ -11,7 +11,6 @@ import {
 } from "./style";
 const CarouselImg = ({ media }) => {
   const slider = useRef(null);
-  console.log(media.length);
 
   return (
     <CarouselDiv>
@@ -19,10 +18,10 @@ const CarouselImg = ({ media }) => {
         <LeftArrow onClick={() => slider.current.prev()} />
       </PrevDivBtn>
       <Carousel effect='fade' ref={slider}>
-        {media.length === 0 ? (
+        {media?.length === 0 ? (
           <CarouselPhoto src={noImg} alt='no image avalible' />
         ) : (
-          media.map((img, idx) => {
+          media?.map((img, idx) => {
             return <CarouselPhoto src={img} alt={idx} />;
           })
         )}

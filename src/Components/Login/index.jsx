@@ -16,6 +16,7 @@ import { schema } from "./schema";
 import usePostApi from "../../Hooks/usePostApi";
 import { URL_LOGIN } from "../../Utils/Url";
 import useLocalestorage from "../../Hooks/useLoacalestorage";
+import { ErrorMsg } from "../GlobalStyle";
 
 const Loginindex = () => {
   const {
@@ -68,13 +69,13 @@ const Loginindex = () => {
       <H1Login>Login</H1Login>
       <InputDiv>
         <InputDefault {...register("email")} placeholder='Username' />
-        <span>{errors.email?.message}</span>
+        <ErrorMsg>{errors.email?.message}</ErrorMsg>
         <InputDefault
           type='password'
           {...register("password")}
           placeholder='Password'
         />
-        <span>{errors.password?.message}</span>
+        <ErrorMsg>{errors.password?.message}</ErrorMsg>
       </InputDiv>
       <InputDiv>
         <LoginButton onClick={handleSubmit(onSubmit)}>Login</LoginButton>

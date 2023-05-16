@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const BookingSchema = yup.object({
+export const bookingSchema = yup.object({
   dateFrom: yup.date().min(new Date(), "must be on or after today"),
   dateTo: yup.date().min(yup.ref("dateForm"), "date must be after start date"),
 

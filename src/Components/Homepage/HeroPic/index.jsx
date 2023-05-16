@@ -9,9 +9,9 @@ import {
   PHero,
   RentOutButton,
   RentVenueButton,
+  StyledLink,
 } from "./style";
-import { Link } from "react-router-dom";
-const HeroImg = () => {
+const HeroImg = ({ scrolldown }) => {
   return (
     <HeroDiv>
       <ImgHero src={BgImg} alt='Hero of a house' />
@@ -22,10 +22,11 @@ const HeroImg = () => {
           <span style={{ color: "#ffcb65" }}> Premium </span>Homes
         </PHero>
         <ButtonHeroGrid>
-          <RentVenueButton href='#scrollDown'>Rent venue</RentVenueButton>
-          <Link to='/AddVenue'>
+          <RentVenueButton onClick={scrolldown}>Rent venue</RentVenueButton>
+          <StyledLink to='/AddVenue'>
+            {" "}
             <RentOutButton>Rent out</RentOutButton>
-          </Link>
+          </StyledLink>
         </ButtonHeroGrid>
       </HeroInfo>
     </HeroDiv>
