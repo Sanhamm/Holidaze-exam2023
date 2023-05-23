@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const HeroDiv = styled.div``;
+export const HeroDiv = styled.div`
+  max-width: 1500px;
+  margin: auto;
+`;
 
 export const ImgHero = styled.img`
   width: 100%;

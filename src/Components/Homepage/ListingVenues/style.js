@@ -3,32 +3,18 @@ import styled from "styled-components";
 
 export const CardGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 70px 120px;
-  justify-content: space-between;
+  grid-template-columns: repeat(3, auto);
   max-width: 1060px;
   margin: auto;
-  @media (max-width: 1270px) {
-    margin: 40px;
-  }
-  @media (max-width: 1100px) {
-    grid-gap: 70px 100px;
-  }
+  justify-content: space-between;
 
   @media (max-width: 1000px) {
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 70px 150px;
-  }
-  @media (max-width: 780px) {
-    grid-gap: 70px 100px;
+    grid-template-columns: repeat(2, auto);
+    justify-content: space-around;
   }
 
   @media (max-width: 650px) {
-    grid-template-columns: 1fr;
-    margin: 70px;
-  }
-  @media (max-width: 550px) {
-    margin: 40px;
+    grid-template-columns: repeat(1, auto);
   }
 `;
 
@@ -37,6 +23,9 @@ export const CardStyle = styled(Card)`
   background-color: #363636;
   border: 2px solid #363636;
   box-shadow: 0 8px 6px -6px black;
+  max-width: 250px;
+  margin: 30px 0px;
+  justify-content: space-between;
 `;
 
 export const ImgCard = styled.img`

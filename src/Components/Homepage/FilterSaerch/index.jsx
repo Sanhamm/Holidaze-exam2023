@@ -18,7 +18,7 @@ const FilterSearch = ({ search, filter }) => {
         placeholder='Search'
         onChange={(prod) => {
           search(prod.target.value);
-          console.log(prod.target.value);
+          //console.log(prod.target.value);
         }}
       />
       <FilterTag
