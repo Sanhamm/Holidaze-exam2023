@@ -13,6 +13,7 @@ export const FlexDiv = styled.div`
   max-width: 1280px;
   margin: auto;
   justify-content: space-between;
+  position: relative;
 `;
 
 export const LogoDiv = styled.div`
@@ -53,7 +54,7 @@ export const HamburgerBackground = styled.div`
   background-color: rgb(35, 35, 37);
   display: block;
   position: absolute;
-  right: 50px;
+  right: 13px;
   top: 62px;
   z-index: 2;
 `;

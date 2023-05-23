@@ -45,50 +45,50 @@ const Header = () => {
             <MenuIcon />
           </MenuDiv>
         </OuterMenuDiv>
+        {openMenu ? (
+          <HamburgerBackground>
+            {accessToken === null ? (
+              <UlMenu>
+                <LiMenu to='/' onClick={() => setOpenMenu(false)}>
+                  Home
+                </LiMenu>
+                <LiMenu to='/Login' onClick={() => setOpenMenu(false)}>
+                  Login
+                </LiMenu>
+                <LiMenu to='/Register' onClick={() => setOpenMenu(false)}>
+                  Register
+                </LiMenu>
+              </UlMenu>
+            ) : (
+              <UlMenu>
+                <LiMenu to='/' onClick={() => setOpenMenu(false)}>
+                  Home
+                </LiMenu>
+                <LiMenu
+                  to={`/Profile/${userName}`}
+                  onClick={() => setOpenMenu(false)}
+                >
+                  Profile
+                </LiMenu>
+                <LiMenu to='/AddVenue' onClick={() => setOpenMenu(false)}>
+                  Add venue
+                </LiMenu>
+                <LiMenu
+                  to='/'
+                  onClick={() => {
+                    setOpenMenu(false);
+                    localStorage.clear();
+                  }}
+                >
+                  Logout
+                </LiMenu>
+              </UlMenu>
+            )}
+          </HamburgerBackground>
+        ) : (
+          ""
+        )}
       </FlexDiv>
-      {openMenu ? (
-        <HamburgerBackground>
-          {accessToken === null ? (
-            <UlMenu>
-              <LiMenu to='/' onClick={() => setOpenMenu(false)}>
-                Home
-              </LiMenu>
-              <LiMenu to='/Login' onClick={() => setOpenMenu(false)}>
-                Login
-              </LiMenu>
-              <LiMenu to='/Register' onClick={() => setOpenMenu(false)}>
-                Register
-              </LiMenu>
-            </UlMenu>
-          ) : (
-            <UlMenu>
-              <LiMenu to='/' onClick={() => setOpenMenu(false)}>
-                Home
-              </LiMenu>
-              <LiMenu
-                to={`/Profile/${userName}`}
-                onClick={() => setOpenMenu(false)}
-              >
-                Profile
-              </LiMenu>
-              <LiMenu to='/AddVenue' onClick={() => setOpenMenu(false)}>
-                Add venue
-              </LiMenu>
-              <LiMenu
-                to='/'
-                onClick={() => {
-                  setOpenMenu(false);
-                  localStorage.clear();
-                }}
-              >
-                Logout
-              </LiMenu>
-            </UlMenu>
-          )}
-        </HamburgerBackground>
-      ) : (
-        ""
-      )}
     </BackgroundDiv>
   );
 };
