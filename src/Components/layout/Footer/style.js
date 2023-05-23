@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const BackgroundFooter = styled.div`
   background-color: #212121;
   height: 130px;
+  margin-top: 100px;
 `;
 
 export const BackToTop = styled.p`

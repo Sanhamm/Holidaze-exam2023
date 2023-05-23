@@ -13,12 +13,18 @@ import {
   CalenderDiv,
   DatePickerStyled,
   HeadingDate,
+  MainDivCalender,
+  NotLoggedInDiv,
+  NotLoggedInH1,
+  NotLoggedInP,
   NumberGuests,
+  StyledLink,
 } from "./style";
 
 const BookingCalender = ({ id, data }) => {
   const dateFormat = "YYYY/MM/DD";
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+  console.log(accessToken);
   const { response, isError, postData } = usePostApi();
   const name = JSON.parse(localStorage.getItem("name"));
   const [selectedDateFrom, setSelectedDateFrom] = useState(null);
@@ -69,7 +75,7 @@ const BookingCalender = ({ id, data }) => {
   };
 
   return (
-    <div>
+    <MainDivCalender>
       <CalenderDiv>
         <HeadingDate>Book From:</HeadingDate>
         <HeadingDate>To:</HeadingDate>
@@ -100,7 +106,19 @@ const BookingCalender = ({ id, data }) => {
       <NumberGuests type='number' placeholder={0} {...register("guests")} />
       {errors.guests && <ErrorMsg>{errors?.guests.message}</ErrorMsg>}
       <EditBtn onClick={handleSubmit(onSubmit)}>Book now</EditBtn>
-    </div>
+      {accessToken === null ? (
+        <NotLoggedInDiv>
+          <NotLoggedInH1>Log in</NotLoggedInH1>
+          <NotLoggedInP>
+            You need to be logged in to book a venue
+            <br />
+            Log in <StyledLink to={"/Login"}>Here</StyledLink>
+          </NotLoggedInP>
+        </NotLoggedInDiv>
+      ) : (
+        ""
+      )}
+    </MainDivCalender>
   );
 };
 

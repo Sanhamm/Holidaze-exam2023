@@ -68,7 +68,7 @@ const Loginindex = () => {
       <LogoLogin src={Logo} alt='Logo of holidaze' />
       <H1Login>Login</H1Login>
       <InputDiv>
-        <InputDefault {...register("email")} placeholder='Username' />
+        <InputDefault {...register("email")} placeholder='Mail' />
         <ErrorMsg>{errors.email?.message}</ErrorMsg>
         <InputDefault
           type='password'

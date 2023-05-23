@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const InputDefault = styled.input`
@@ -73,4 +74,42 @@ export const AddMoreBTn = styled.button`
 
 export const ErrorMsg = styled.span`
   color: #ffbd3d;
+`;
+export const NotVenueH1 = styled.h1`
+  color: #ffbd3d;
+  text-align: center;
+  margin-top: 90px;
+`;
+export const NotVenueP = styled.p`
+  color: white;
+  text-align: center;
+  width: 500px;
+  margin: 60px auto;
+  line-height: 2;
+`;
+
+export const NotVenueDiv = styled.div`
+  width: 100%;
+  height: 1000px;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  top: 90px;
+  right: 0px;
+`;
+
+export const NotVenueBtn = styled.button`
+  padding: 10px 30px;
+  border-radius: 0;
+  border: 1px solid #ffbd3d;
+  background-color: #ffbd3d;
+  margin: auto;
+  &:hover {
+    cursor: pointer;
+    background-color: #ffcb65;
+    border: 1px solid #ffcb65;
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  color: #c3752d;
 `;
