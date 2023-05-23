@@ -13,7 +13,7 @@ export const PVenueInfo = styled.p`
   color: white;
   max-width: 1060px;
   line-height: 1.5rem;
-  margin: 70px auto;
+  margin: 70px auto 10px auto;
   font-size: 1.2rem;
 `;
 
@@ -120,5 +120,17 @@ export const EditIcon = styled(SettingOutlined)`
 
   &:hover {
     transform: rotate(360deg);
+  }
+`;
+
+export const ReadMoreBtn = styled.button`
+  border: 1px solid white;
+  padding: 5px;
+  background-color: transparent;
+  color: white;
+  margin-bottom: 60px;
+  &:hover {
+    cursor: pointer;
+    background-color: grey;
   }
 `;

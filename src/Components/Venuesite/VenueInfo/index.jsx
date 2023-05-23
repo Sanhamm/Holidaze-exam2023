@@ -12,6 +12,7 @@ import {
   PAvatar,
   PVenueInfo,
   ProfileAvatar,
+  ReadMoreBtn,
 } from "./style";
 import { FlexDiv } from "./style";
 import NoAvatar from "../../../media/blank-profile-picture-gc1cc27fcf_1280.png";
@@ -19,10 +20,12 @@ import { Link } from "react-router-dom";
 import { URL_POST_VENUES } from "../../../Utils/Url";
 import BookingCalender from "./Calender";
 import useApiMethod from "../../../Hooks/useApiMehod";
+import { Button } from "antd";
 const VenueInfo = ({ data, id }) => {
   const name = JSON.parse(localStorage.getItem("name"));
   const [fetchData] = useApiMethod();
   const [openEdit, setOpenEdit] = useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   const handleDelete = () => {
     fetchData(`${URL_POST_VENUES}/${id}`, "DELETE");
@@ -58,7 +61,21 @@ const VenueInfo = ({ data, id }) => {
       )}
 
       <H1VenueInfo>{data.name}</H1VenueInfo>
-      <PVenueInfo>{data.description}</PVenueInfo>
+      <PVenueInfo>
+        {showMore ? data.description : `${data.description.substring(0, 250)}`}
+      </PVenueInfo>
+      {data.description.length > 250 ? (
+        showMore === false ? (
+          <ReadMoreBtn onClick={() => setShowMore(true)}>Read more</ReadMoreBtn>
+        ) : (
+          <ReadMoreBtn onClick={() => setShowMore(false)}>
+            Show less
+          </ReadMoreBtn>
+        )
+      ) : (
+        ""
+      )}
+
       <div>
         <GridProfileDiv>
           <div>
