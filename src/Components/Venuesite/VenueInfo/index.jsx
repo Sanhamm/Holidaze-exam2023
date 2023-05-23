@@ -15,7 +15,6 @@ import {
 } from "./style";
 import { FlexDiv } from "./style";
 import NoAvatar from "../../../media/blank-profile-picture-gc1cc27fcf_1280.png";
-import { VenuButton } from "../../GlobalStyle";
 import { Link } from "react-router-dom";
 import { URL_POST_VENUES } from "../../../Utils/Url";
 import BookingCalender from "./Calender";

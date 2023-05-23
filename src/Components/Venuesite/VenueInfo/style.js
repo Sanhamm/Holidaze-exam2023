@@ -1,7 +1,6 @@
 import { SettingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
 import { Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const H1VenueInfo = styled.h1`
   text-align: center;

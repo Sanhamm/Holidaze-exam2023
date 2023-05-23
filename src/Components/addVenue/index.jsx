@@ -16,15 +16,24 @@ import {
   AddVenuButton,
   AddMoreBTn,
   ErrorMsg,
+  NotVenueP,
+  NotVenueDiv,
+  NotVenueH1,
+  StyledLink,
 } from "./style";
 import { URL_POST_VENUES } from "../../Utils/Url";
 import useApiMethod from "../../Hooks/useApiMehod";
+import { URL_PROFILE } from "../../Utils/Url";
+import useLocalStorage from "../../Hooks/useLoacalestorage";
 
 const AddVenueIndex = () => {
   const [inputFields, setInputFields] = useState([{ id: 1, name: "input-1" }]);
   // const { data, response, isError, postData } = usePostApi();
   const [fetchData, dataInfo, isError, response] = useApiMethod();
+  const [venueManager, setVenueManager] = useLocalStorage("venueManager");
 
+  const name = JSON.parse(localStorage.getItem("name"));
+  console.log(name);
   const {
     register,
     handleSubmit,
@@ -37,13 +46,27 @@ const AddVenueIndex = () => {
     fetchData(URL_POST_VENUES, "POST", data);
   };
 
+  const becomeVenueManager = () => {
+    fetchData(`${URL_PROFILE}/${name}`, "PUT", {
+      venueManager: true,
+    });
+  };
+
   if (isError) {
     console.log(isError);
   }
-
+  if (dataInfo) {
+    setVenueManager(dataInfo.venueManager);
+  }
+  console.log(response);
   if (response?.status === 201) {
     window.location.href = `/Venue/${dataInfo.id}`;
   }
+  if (response?.status === 200) {
+    window.location.href = `/AddVenue`;
+  }
+
+  console.log(dataInfo);
 
   const addInputField = () => {
     const newInputId = inputFields.length + 1;
@@ -104,6 +127,28 @@ const AddVenueIndex = () => {
           Add venue
         </AddVenuButton>
       </InputDiv>
+      {venueManager === true ? (
+        ""
+      ) : venueManager === null ? (
+        <NotVenueDiv>
+          <NotVenueH1>You are not logged in</NotVenueH1>
+          <NotVenueP>
+            We can see you are not logged in or registered, if you want to rent
+            out your home you need to be logged in.<br></br>{" "}
+            <StyledLink to={"/Login"}>Login</StyledLink> or{" "}
+            <StyledLink to={"/Register"}>Register</StyledLink>
+          </NotVenueP>
+        </NotVenueDiv>
+      ) : (
+        <NotVenueDiv>
+          <NotVenueH1>You are not a venue manager</NotVenueH1>
+          <NotVenueP>
+            We can see you are not an venue manager, if you want to rent out
+            your home you need to become one.<br></br>{" "}
+            <StyledLink onClick={becomeVenueManager}>Click here</StyledLink>
+          </NotVenueP>
+        </NotVenueDiv>
+      )}
     </AddVenueDiv>
   );
 };

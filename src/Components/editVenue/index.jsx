@@ -12,7 +12,6 @@ import {
   VenuButton,
 } from "../GlobalStyle";
 import Logo from "../../media/Holidaze.svg";
-import usePostApi from "../../Hooks/usePostApi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
 import { useForm } from "react-hook-form";
@@ -27,6 +26,7 @@ const EditVenueIndex = () => {
   const [inputFields, setInputFields] = useState([{ id: 1, name: "input-1" }]);
   const [fetchData, dataInfo, isError, response] = useApiMethod();
   const { data } = useApi(`${URL_POST_VENUES}/${id}`);
+  //console.log(data);
   console.log(dataInfo);
   const {
     register,
@@ -70,9 +70,9 @@ const EditVenueIndex = () => {
       <H1Venue>Edit your venue</H1Venue>
       <ErrorMsg>{errors.name?.message}</ErrorMsg>
       <InputDefault
-        {...register("name")}
         placeholder='Title'
-        defaultValue={data?.name}
+        defaultValue={data.name}
+        {...register("name")}
       />
       {inputFields.map((inputField, index) => (
         <div key={`image-${index}`}>
@@ -83,8 +83,8 @@ const EditVenueIndex = () => {
             id={`image[${index}]`}
             name={inputField.name}
             placeholder='Image Url'
+            defaultValue={data.media}
             {...register(`media[${index}]`)}
-            defaultValue={data?.media}
           />
         </div>
       ))}
@@ -95,34 +95,54 @@ const EditVenueIndex = () => {
         id=''
         cols='30'
         rows='10'
+        defaultValue={data.description}
         {...register("description")}
-        defaultValue={data?.description}
       />
       <ErrorMsg>{errors.description?.message}</ErrorMsg>
 
       <InputDefault
-        {...register("price")}
         type='number'
         placeholder='Price'
-        defaultValue={data?.price}
+        defaultValue={data.price}
+        {...register("price")}
       />
       <ErrorMsg>{errors.price?.message}</ErrorMsg>
       <InputDefault
-        {...register("maxGuests")}
         type='number'
         placeholder='Max guest'
-        defaultValue={data?.maxGuests}
+        defaultValue={data.maxGuests}
+        {...register("maxGuests")}
       />
       <ErrorMsg>{errors.maxGuests?.message}</ErrorMsg>
 
       <CheckBoxDiv>
-        <input {...register("name")} type='checkbox' id='wifi' />
+        <input
+          defaultChecked={data.meta?.wifi ? true : false}
+          {...register("meta.wifi")}
+          type='checkbox'
+          id='wifi'
+        />
         <LabelStyled htmlFor='wifi'>Wifi</LabelStyled>
-        <input {...register("name")} type='checkbox' id='parking' />
+        <input
+          defaultChecked={data.meta?.parking ? true : false}
+          {...register("meta.parking")}
+          type='checkbox'
+          id='parking'
+        />
         <LabelStyled htmlFor='parking'>Parking</LabelStyled>
-        <input {...register("name")} type='checkbox' id='breakfast' />
+        <input
+          defaultChecked={data.meta?.breakfast ? true : false}
+          {...register("meta.breakfast")}
+          type='checkbox'
+          id='breakfast'
+        />
         <LabelStyled htmlFor='breakfast'>Breakfast</LabelStyled>
-        <input {...register("name")} type='checkbox' id='pets' />
+        <input
+          defaultChecked={data.meta?.pets ? true : false}
+          {...register("meta.pets")}
+          type='checkbox'
+          id='pets'
+        />
         <LabelStyled htmlFor='pets'>Pets</LabelStyled>
       </CheckBoxDiv>
       <InputDiv>
