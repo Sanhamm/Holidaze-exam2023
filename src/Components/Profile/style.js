@@ -12,6 +12,7 @@ export const ProfileInfo = styled.div`
   grid-template-columns: 40% 60%;
   max-width: 1080px;
   margin: 80px auto;
+  padding-top: 60px;
 `;
 
 export const ProfileInfoAvatar = styled.div`

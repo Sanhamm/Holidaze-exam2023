@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const HeroDiv = styled.div`
   max-width: 1500px;
   margin: auto;
+  padding-top: 30px;
 `;
 
 export const ImgHero = styled.img`

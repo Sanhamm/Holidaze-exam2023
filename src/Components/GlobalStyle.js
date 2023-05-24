@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Loader = styled.img`
   margin: 80px auto;
   text-align: center;
+  padding-top: 60px;
 `;
 
 export const LoaderDiv = styled.div`

@@ -41,7 +41,7 @@ export const GridProfileDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   max-width: 1060px;
-  margin: 20px auto 90px auto;
+  margin: 70px auto 90px auto;
   @media (max-width: 800px) {
     grid-template-columns: 1fr;
   }

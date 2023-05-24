@@ -31,6 +31,8 @@ const AddVenueIndex = () => {
   // const { data, response, isError, postData } = usePostApi();
   const [fetchData, dataInfo, isError, response] = useApiMethod();
   const [venueManager, setVenueManager] = useLocalStorage("venueManager");
+  const venueM = JSON.parse(localStorage.getItem("venueManager"));
+  console.log(venueM);
 
   const name = JSON.parse(localStorage.getItem("name"));
   console.log(name);
@@ -127,9 +129,9 @@ const AddVenueIndex = () => {
           Add venue
         </AddVenuButton>
       </InputDiv>
-      {venueManager === true ? (
+      {venueM === true ? (
         ""
-      ) : venueManager === null ? (
+      ) : venueM === null ? (
         <NotVenueDiv>
           <NotVenueH1>You are not logged in</NotVenueH1>
           <NotVenueP>

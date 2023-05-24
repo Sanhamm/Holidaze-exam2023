@@ -93,7 +93,7 @@ export const NotVenueDiv = styled.div`
   height: 1000px;
   background-color: rgba(0, 0, 0, 0.9);
   position: absolute;
-  top: 90px;
+  top: 76px;
   right: 0px;
 `;
 

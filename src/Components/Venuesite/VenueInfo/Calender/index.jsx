@@ -115,6 +115,14 @@ const BookingCalender = ({ id, data }) => {
             Log in <StyledLink to={"/Login"}>Here</StyledLink>
           </NotLoggedInP>
         </NotLoggedInDiv>
+      ) : data.owner.name === name ? (
+        <NotLoggedInDiv>
+          <NotLoggedInH1>Your venue</NotLoggedInH1>
+          <NotLoggedInP>
+            You cannot book one of your own venues.
+            <br />
+          </NotLoggedInP>
+        </NotLoggedInDiv>
       ) : (
         ""
       )}
