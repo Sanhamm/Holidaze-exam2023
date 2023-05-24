@@ -5,12 +5,16 @@ import styled from "styled-components";
 export const BackgroundDiv = styled.div`
   background-color: #232325;
   border-bottom: 1px solid #c3752d;
+  position: fixed;
+  z-index: 4;
+  width: 100%;
+  top: 0px;
 `;
 
 export const FlexDiv = styled.div`
   padding: 5px;
   display: flex;
-  max-width: 1280px;
+  max-width: 1080px;
   margin: auto;
   justify-content: space-between;
   position: relative;

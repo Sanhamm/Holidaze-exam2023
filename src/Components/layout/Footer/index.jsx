@@ -3,8 +3,7 @@ import { BackToTop, BackgroundFooter, CopyRight } from "./style";
 
 const Footer = () => {
   const scrollToTop = () => {
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
     <BackgroundFooter>
