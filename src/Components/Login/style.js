@@ -48,7 +48,8 @@ export const LinkLogin = styled(Link)`
 
 export const LogoLogin = styled.img`
   display: block;
-  margin: 80px auto;
+  margin: 90px auto;
+  padding-top: 20px;
 `;
 
 export const InputDiv = styled.div`
