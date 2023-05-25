@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AddMoreBTn,
   CheckBoxDiv,
@@ -13,7 +13,7 @@ import {
 } from "../GlobalStyle";
 import Logo from "../../media/Holidaze.svg";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "./schema";
+import { schema } from "../addVenue/schema";
 import { useForm } from "react-hook-form";
 import { URL_POST_VENUES } from "../../Utils/Url";
 import { useParams } from "react-router-dom";
@@ -31,18 +31,24 @@ const EditVenueIndex = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: data
-      ? {
-          name: data.name,
-          description: data.description,
-          price: data.price,
-          maxGuests: data.maxGuests,
-        }
-      : {},
   });
+
+  useEffect(() => {
+    setValue("name", data?.name);
+    setValue("description", data?.description);
+    setValue("price", data?.price);
+    setValue("maxGuests", data?.maxGuests);
+    setValue("name", data?.name);
+    setValue("media", data?.media);
+    setValue("meta.pets", data.meta?.pets);
+    setValue("meta.breakfast", data.meta?.breakfast);
+    setValue("meta.parking", data.meta?.parking);
+    setValue("meta.wifi", data.meta?.wifi);
+  }, [setValue, data]);
 
   const handleEdit = (editInfo) => {
     fetchData(`${URL_POST_VENUES}/${id}`, "PUT", editInfo);

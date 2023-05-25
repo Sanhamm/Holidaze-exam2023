@@ -31,11 +31,10 @@ const AddVenueIndex = () => {
   // const { data, response, isError, postData } = usePostApi();
   const [fetchData, dataInfo, isError, response] = useApiMethod();
   const [venueManager, setVenueManager] = useLocalStorage("venueManager");
+
   const venueM = JSON.parse(localStorage.getItem("venueManager"));
-  console.log(venueM);
 
   const name = JSON.parse(localStorage.getItem("name"));
-  console.log(name);
   const {
     register,
     handleSubmit,
@@ -57,7 +56,7 @@ const AddVenueIndex = () => {
   if (isError) {
     console.log(isError);
   }
-  if (dataInfo) {
+  if (dataInfo?.venueManager) {
     setVenueManager(dataInfo.venueManager);
   }
   console.log(response);
@@ -97,9 +96,10 @@ const AddVenueIndex = () => {
           />
         </div>
       ))}
-      <AddMoreBTn onClick={addInputField}>+ Add Input Field</AddMoreBTn>
+      <AddMoreBTn onClick={addInputField}>+ Add More Images</AddMoreBTn>
       <TextArea
         name='Description'
+        placeholder='Description of house'
         id=''
         cols='30'
         rows='10'

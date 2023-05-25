@@ -26,7 +26,8 @@ const VenueInfo = ({ data, id }) => {
   const [fetchData] = useApiMethod();
   const [openEdit, setOpenEdit] = useState(false);
   const [showMore, setShowMore] = useState(false);
-
+  const token = JSON.parse(localStorage.getItem("accessToken"));
+  console.log(token);
   const handleDelete = () => {
     fetchData(`${URL_POST_VENUES}/${id}`, "DELETE");
   };
@@ -81,12 +82,25 @@ const VenueInfo = ({ data, id }) => {
           <div>
             <FlexDiv>
               <ProfileAvatar
-                src={data.owner.avatar === null ? NoAvatar : data.owner.avatar}
+                src={
+                  data.owner.avatar === null || data.owner.avatar === ""
+                    ? NoAvatar
+                    : data.owner.avatar
+                }
                 alt={data.owner.name}
               />
-              <PAvatar to={`/Profile/${data.owner.name}`}>
-                {data.owner.name}
-              </PAvatar>
+              {token ? (
+                <PAvatar to={`/Profile/${data.owner.name}`}>
+                  {data.owner.name}
+                </PAvatar>
+              ) : (
+                <PAvatar
+                  to={"/Login"}
+                  title='Cannot visit profiles without being logged in'
+                >
+                  {data.owner.name}
+                </PAvatar>
+              )}
             </FlexDiv>
             <GuestPTag>
               <GuestSpanProfile>Guests: </GuestSpanProfile>

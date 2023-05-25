@@ -43,7 +43,7 @@ const TabsInfo = ({ data, profileName }) => {
                     <CardDivPriceButton>
                       <PriceCardStyle>{venue.price},-</PriceCardStyle>
                       <Link to={`/Venue/${venue.id}`}>
-                        <ButtonCardStyle>Show Venue</ButtonCardStyle>
+                        <ButtonCardStyle>Show venue</ButtonCardStyle>
                       </Link>
                     </CardDivPriceButton>
                   </CardStyle>

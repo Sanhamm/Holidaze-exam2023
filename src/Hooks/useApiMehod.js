@@ -19,7 +19,7 @@ const useApiMethod = () => {
       };
       const response = await fetch(url, postData);
       const json = await response.json();
-      console.log(json.avatar);
+      console.log(json);
       console.log(response);
       setDataInfo(json);
       setResponse(response);
