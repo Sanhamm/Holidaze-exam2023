@@ -24,9 +24,23 @@ export const LogoDiv = styled.div`
   margin: 10px;
 `;
 
-export const OuterMenuDiv = styled.div`
+export const DesktopMenuDiv = styled.div`
   display: flex;
+  align-content: center;
+  width: 300px;
+  margin-right: 20px;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+`;
+
+export const OuterMenuDiv = styled.div`
+  display: none;
   align-items: center;
+  @media (max-width: 800px) {
+    display: flex;
+  }
 `;
 
 export const MenuDiv = styled.div`
@@ -42,7 +56,19 @@ export const MenuDiv = styled.div`
 export const UserIcon = styled(UserOutlined)`
   color: white;
   margin: auto 5px auto 0px;
+  border: 1px solid white;
+  border-radius: 100%;
+  padding: 2px;
 `;
+
+export const UserIconDesktop = styled(UserOutlined)`
+  color: white;
+  margin: auto 5px auto 25px;
+  border: 1px solid white;
+  border-radius: 100%;
+  padding: 2px;
+`;
+
 export const MenuIcon = styled(MenuOutlined)`
   color: white;
   margin: auto;
@@ -62,12 +88,23 @@ export const HamburgerBackground = styled.div`
   top: 62px;
   z-index: 2;
 `;
+export const HamburgerBackgroundDesktop = styled.div`
+  height: 100px;
+  width: 150px;
+  background-color: rgb(35, 35, 37);
+  display: block;
+  position: absolute;
+  right: 13px;
+  top: 62px;
+  z-index: 2;
+`;
 
 export const LiMenu = styled(Link)`
   color: white;
   text-decoration: none;
   padding: 5px;
   display: block;
+  margin: auto;
   &:hover {
     text-decoration: underline;
   }
@@ -83,4 +120,8 @@ export const AvatarImg = styled.img`
   border-radius: 100%;
   border: 1px solid white;
   margin-right: 5px;
+  margin: auto 5px auto 0px;
+  &:hover {
+    cursor: pointer;
+  }
 `;

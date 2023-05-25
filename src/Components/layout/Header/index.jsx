@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import Logo from "../../../media/Holidaze.svg";
-import { AvatarImg, HamburgerBackground, LiMenu, UlMenu } from "./style";
+import {
+  AvatarImg,
+  DesktopMenu,
+  DesktopMenuDiv,
+  HamburgerBackground,
+  HamburgerBackgroundDesktop,
+  LiMenu,
+  UlMenu,
+  UserIconDesktop,
+} from "./style";
 
 import {
   BackgroundDiv,
@@ -15,6 +24,7 @@ import {
 import { Link } from "react-router-dom";
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const [openProfile, setProfileMenu] = useState(false);
   const accessToken = localStorage.getItem("accessToken");
   const userName = JSON.parse(localStorage.getItem("name"));
   const avatar = JSON.parse(localStorage.getItem("avatar"));
@@ -27,6 +37,45 @@ const Header = () => {
             <ImgLogo src={Logo} alt='Logo holidaze' />
           </Link>
         </LogoDiv>
+        {accessToken ? (
+          <DesktopMenuDiv>
+            <LiMenu to='/' onClick={() => setProfileMenu(false)}>
+              Home
+            </LiMenu>
+            <LiMenu to='/AddVenue' onClick={() => setProfileMenu(false)}>
+              Add venue
+            </LiMenu>
+            {avatar === null || avatar === "" ? (
+              <UserIconDesktop
+                onClick={() => {
+                  if (openProfile === false) {
+                    setProfileMenu(true);
+                  } else {
+                    setProfileMenu(false);
+                  }
+                }}
+              />
+            ) : (
+              <AvatarImg
+                src={avatar}
+                alt='avatar for user'
+                onClick={() => {
+                  if (openProfile === false) {
+                    setProfileMenu(true);
+                  } else {
+                    setProfileMenu(false);
+                  }
+                }}
+              />
+            )}
+          </DesktopMenuDiv>
+        ) : (
+          <DesktopMenuDiv>
+            <LiMenu to='/'>Home</LiMenu>
+            <LiMenu to='/Login'>Login</LiMenu>
+            <LiMenu to='/Register'>Register</LiMenu>
+          </DesktopMenuDiv>
+        )}
         <OuterMenuDiv>
           <MenuDiv
             onClick={() => {
@@ -45,6 +94,30 @@ const Header = () => {
             <MenuIcon />
           </MenuDiv>
         </OuterMenuDiv>
+        {openProfile ? (
+          <HamburgerBackgroundDesktop>
+            <UlMenu>
+              <LiMenu
+                to={`/Profile/${userName}`}
+                onClick={() => setProfileMenu(false)}
+              >
+                Profile
+              </LiMenu>
+              <LiMenu
+                to='/'
+                onClick={() => {
+                  setProfileMenu(false);
+                  localStorage.clear();
+                }}
+              >
+                Logout
+              </LiMenu>
+            </UlMenu>
+          </HamburgerBackgroundDesktop>
+        ) : (
+          ""
+        )}
+
         {openMenu ? (
           <HamburgerBackground>
             {accessToken === null ? (
