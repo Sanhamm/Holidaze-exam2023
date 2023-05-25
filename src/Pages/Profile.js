@@ -6,7 +6,7 @@ const Profile = () => {
   return (
     <>
       <Helmet>
-        <title>Holidaze PP</title>
+        <title>Holidaze</title>
         <meta name='Profile page holidaze' />
       </Helmet>
       <ProfileSite />;

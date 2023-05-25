@@ -7,7 +7,7 @@ export const NextDivBtn = styled.div`
   height: 650px;
   width: 80px;
   position: absolute;
-  top: 30px;
+  top: 60px;
   z-index: 1;
   right: 0px;
   @media (max-width: 850px) {
@@ -59,7 +59,7 @@ export const CarouselDiv = styled.div`
   margin: auto;
   position: relative;
   max-width: 1480px;
-  padding-top: 30px;
+  padding-top: 60px;
 `;
 
 export const RightArrow = styled(RightOutlined)`

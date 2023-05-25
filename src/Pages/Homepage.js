@@ -6,7 +6,7 @@ const Homepage = () => {
   return (
     <div>
       <Helmet>
-        <title>Holidaze</title>
+        <title>Holidaze | Homepage</title>
         <meta name='Holidaze is a page where you add your own homes to rent out' />
       </Helmet>
       <HomeIndex />
