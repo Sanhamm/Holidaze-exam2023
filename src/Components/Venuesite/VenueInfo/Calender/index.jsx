@@ -24,7 +24,6 @@ import {
 const BookingCalender = ({ id, data }) => {
   const dateFormat = "YYYY/MM/DD";
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
-  console.log(accessToken);
   const { response, isError, postData } = usePostApi();
   const name = JSON.parse(localStorage.getItem("name"));
   const [selectedDateFrom, setSelectedDateFrom] = useState(null);
@@ -103,7 +102,13 @@ const BookingCalender = ({ id, data }) => {
       {errors.dateFrom && <ErrorMsg>{errors?.dateFrom.message}</ErrorMsg>}
       {errors.dateTo && <ErrorMsg>{errors?.dateTo.message}</ErrorMsg>}
       <HeadingDate>Number of guests:</HeadingDate>
-      <NumberGuests type='number' placeholder={0} {...register("guests")} />
+      <NumberGuests
+        type='number'
+        placeholder={0}
+        min={1}
+        max={data.maxGuests}
+        {...register("guests")}
+      />
       {errors.guests && <ErrorMsg>{errors?.guests.message}</ErrorMsg>}
       <EditBtn onClick={handleSubmit(onSubmit)}>Book now</EditBtn>
       {accessToken === null ? (

@@ -59,15 +59,12 @@ const AddVenueIndex = () => {
   if (dataInfo?.venueManager) {
     setVenueManager(dataInfo.venueManager);
   }
-  console.log(response);
   if (response?.status === 201) {
     window.location.href = `/Venue/${dataInfo.id}`;
   }
   if (response?.status === 200) {
     window.location.href = `/AddVenue`;
   }
-
-  console.log(dataInfo);
 
   const addInputField = () => {
     const newInputId = inputFields.length + 1;

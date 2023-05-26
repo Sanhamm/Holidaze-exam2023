@@ -15,7 +15,7 @@ const useGet = () => {
       };
       const response = await fetch(url, postData);
       const json = await response.json();
-      console.log(response);
+      //console.log(response);
       setData(json);
     } catch (err) {
       setError(err);

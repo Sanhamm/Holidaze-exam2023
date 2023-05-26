@@ -56,7 +56,6 @@ const Loginindex = () => {
       setAvatar(data.avatar);
       setVenueManager(data.venueManager);
     }
-    console.log(data?.avatar);
   }, [data]);
 
   if (response.status === 200) {

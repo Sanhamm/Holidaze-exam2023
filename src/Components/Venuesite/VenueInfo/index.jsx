@@ -27,7 +27,6 @@ const VenueInfo = ({ data, id }) => {
   const [openEdit, setOpenEdit] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const token = JSON.parse(localStorage.getItem("accessToken"));
-  console.log(token);
   const handleDelete = () => {
     fetchData(`${URL_POST_VENUES}/${id}`, "DELETE");
   };
